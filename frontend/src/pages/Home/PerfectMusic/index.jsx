@@ -6,8 +6,7 @@ import djPartyVideo from "../../../assets/Home/Book your musician/Home Page/Vide
 import corporateEventsVideo from "../../../assets/Home/Book your musician/Home Page/Videos/video 4";
 
 const PerfectMusicSession = () => {
-  const [activeCard, setActiveCard] = useState(0); // Track the active (larger) card
-
+  const [activeCard, setActiveCard] = useState(0);
   const events = [
     { title: "Private Parties", video: privatePartyVideo },
     { title: "Wedding Event", video: weddingEventVideo },

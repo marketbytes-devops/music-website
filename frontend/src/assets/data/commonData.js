@@ -1,9 +1,9 @@
 const commonData = {
   navLinks: [
-    { name: "Home" },
-    { name: "Events" },
-    { name: "Services" },
-    { name: "Gallery" },
+    { name: "Home", path: "/" },
+    { name: "Events", path: "/events" },
+    { name: "Services", path: "/services" },
+    { name: "Gallery", path: "/gallery" },
   ],
 };
 

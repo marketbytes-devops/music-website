@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Button from '../../Button';
+import { Link } from "react-router-dom";
+import Button from "../../Button";
 import commonData from "../../../assets/data/commonData";
 
 const Navbar = () => {
@@ -57,19 +58,24 @@ const Navbar = () => {
                   className={`primary-font text-sm md:text-sm font-normal flex items-center space-x-1 transition-colors duration-200 
                     ${activeLink === link.name ? "text-textBlack" : "text-textBlack"} 
                     hover:text-textOrange cursor-pointer md:text-textGray/70 md:hover:text-textOrange`}
-                  onClick={() => {
-                    setActiveLink(link.name);
-                    setIsMenuOpen(false);
-                  }}
                   variants={linkVariants}
                   initial="hidden"
                   animate="visible"
                   custom={index}
                 >
-                  {activeLink === link.name && (
-                    <span className="bg-textOrange w-2 h-2 rounded-full"></span>
-                  )}
-                  <span>{link.name}</span>
+                  <Link
+                    to={link.path}
+                    className="flex items-center space-x-1 w-full"
+                    onClick={() => {
+                      setActiveLink(link.name);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    {activeLink === link.name && (
+                      <span className="bg-textOrange w-2 h-2 rounded-full"></span>
+                    )}
+                    <span>{link.name}</span>
+                  </Link>
                 </motion.li>
               ))}
             </motion.ul>
@@ -82,14 +88,19 @@ const Navbar = () => {
               className={`primary-font text-sm md:text-sm font-normal flex items-center space-x-2 transition-colors duration-200 
                 ${activeLink === link.name ? "text-textGray" : "text-textGray/70"} 
                 hover:text-textOrange cursor-pointer`}
-              onClick={() => {
-                setActiveLink(link.name);
-              }}
             >
-              {activeLink === link.name && (
-                <span className="bg-textOrange w-2 h-2 rounded-full"></span>
-              )}
-              <span>{link.name}</span>
+              <Link
+                to={link.path}
+                className="flex items-center space-x-2"
+                onClick={() => {
+                  setActiveLink(link.name);
+                }}
+              >
+                {activeLink === link.name && (
+                  <span className="bg-textOrange w-2 h-2 rounded-full"></span>
+                )}
+                <span>{link.name}</span>
+              </Link>
             </li>
           ))}
         </ul>

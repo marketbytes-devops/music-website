@@ -4,7 +4,7 @@ import DancingBlob from '../../components/DancingBlob';
 
 const Home = () => {
   return (
-    <div className="bg-gradient-to-b from-transparent via-transparent to-[#662451]/20 animate-gradient min-h-screen">
+    <div className="bg-gradient-to-b from-transparent via-transparent to-[#662451]/10 animate-gradient min-h-screen">
       <section>
         <Hero />
       </section>
