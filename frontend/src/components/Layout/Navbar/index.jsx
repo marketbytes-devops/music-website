@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="z-50 flex items-center justify-center">
+    <div className="z-50 flex items-center justify-center fixed w-full bg-black">
       <nav className="w-full max-w-7xl py-4 flex items-center justify-between">
         <h1 className="ml-6 sm:ml-6 md:ml-0 lg:ml-0 xl:ml-0 primary-font text-sm md:text-sm font-normal text-textGray">
           Book Your Musician
