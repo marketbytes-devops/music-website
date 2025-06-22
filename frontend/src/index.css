@@ -46,3 +46,55 @@ body {
   background-size: 200% 200%;
   animation: gradient 8s ease infinite;
 }
+
+.three-circle-morphing-gradient {
+  background: 
+    radial-gradient(circle at 20% 20%, #1F6ED2 0%, transparent 20%),
+    radial-gradient(circle at 60% 40%, #4D147E 0%, transparent 20%),
+    radial-gradient(circle at 40% 80%, #F96141 0%, transparent 20%);
+  background-size: 300% 300%;
+  animation: threeCircleMorph 12s ease infinite;
+}
+
+@keyframes threeCircleMorph {
+  0% {
+    background: 
+      radial-gradient(circle at 20% 20%, #1F6ED2 0%, transparent 20%),
+      radial-gradient(circle at 60% 40%, #4D147E 0%, transparent 20%),
+      radial-gradient(circle at 40% 80%, #F96141 0%, transparent 20%);
+    background-size: 300% 300%;
+    background-position: 0% 0%, 50% 50%, 100% 100%;
+  }
+  25% {
+    background: 
+      radial-gradient(circle at 20% 30%, #4D147E 0%, transparent 20%),
+      radial-gradient(circle at 30% 20%, #F96141 0%, transparent 20%),
+      radial-gradient(circle at 50% 20%, #1F6ED2 0%, transparent 20%);
+    background-size: 400% 400%;
+    background-position: 100% 0%, 0% 100%, 50% 50%;
+  }
+  50% {
+    background: 
+      radial-gradient(circle at 50% 50%, #F96141 0%, transparent 20%),
+      radial-gradient(circle at 80% 80%, #1F6ED2 0%, transparent 20%),
+      radial-gradient(circle at 20% 60%, #4D147E 0%, transparent 20%);
+    background-size: 350% 350%;
+    background-position: 50% 50%, 100% 100%, 0% 0%;
+  }
+  75% {
+    background: 
+      radial-gradient(circle at 30% 80%, #1F6ED2 0%, transparent 20%),
+      radial-gradient(circle at 50% 20%, #4D147E 0%, transparent 20%),
+      radial-gradient(circle at 20% 50%, #F96141 0%, transparent 20%);
+    background-size: 300% 300%;
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  100% {
+    background: 
+      radial-gradient(circle at 20% 20%, #1F6ED2 0%, transparent 20%),
+      radial-gradient(circle at 60% 40%, #4D147E 0%, transparent 20%),
+      radial-gradient(circle at 40% 80%, #F96141 0%, transparent 20%);
+    background-size: 300% 300%;
+    background-position: 0% 0%, 50% 50%, 100% 100%;
+  }
+}

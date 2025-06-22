@@ -150,7 +150,7 @@ const Hero = ({ homeData: propHomeData = homeData }) => {
             >
               Great Events Start with Great Music
             </h1>
-            <p className="text-sm sm:text-base text-textGray max-w-sm">
+            <p className="text-sm sm:text-base text-textGray max-w-sm primary-font">
               Discover top musicians, book effortlessly, and make your event
               unforgettable.
             </p>

@@ -7,14 +7,14 @@ const Button = ({ name, onClick, className = '', stylesInline = {}, dotColor = '
         className={`absolute inset-0 rounded-full ${gradient} animate-spin group-hover:animate-none`}
       ></div>
       <button
-        className={`relative rounded-full flex items-center justify-center ${className} hover:translate-x-[0.15em] active:translate-x-[0.15em] active:translate-y-[0.15em] transition-all duration-300`}
+        className={`relative rounded-full flex items-center justify-center ${className} hover:translate-x-[0.10em] active:translate-x-[0.10em] active:translate-y-[0.15em] transition-all duration-300`}
         onClick={onClick}
         style={stylesInline}
         aria-label={name}
       >
         <span>{name}</span>
         <span
-          className={`ml-2 ${dotColor} w-2 h-2 rounded-full`}
+          className={`ml-4 ${dotColor} w-2 h-2 rounded-full`}
           aria-hidden="true"
         ></span>
       </button>

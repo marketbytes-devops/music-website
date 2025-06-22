@@ -16,8 +16,6 @@ const ArrowSync = ({ width = 39, height = 39, fill = 'white', className = '' }) 
   </svg>
 );
 
-// Add more icons here in the future
-// Example placeholder for another icon
 // const AnotherIcon = ({ width = 24, height = 24, fill = 'white', className = '' }) => (
 //   <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
 //     {/* SVG path for another icon */}
