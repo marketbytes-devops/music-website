@@ -1,6 +1,8 @@
 import Hero from './Hero';
 import DancingBlob from '../../components/DancingBlob';
 import About from './About';
+import PerfectMusic from './PerfectMusic';
+import BookWithUs from './BookWithUs';
 
 const Home = () => {
   return (
@@ -13,6 +15,12 @@ const Home = () => {
       </div>
       <section className='pt-8 sm:pt-8 md:pt-8'>
         <About />
+      </section>
+      <section>
+        <PerfectMusic />
+      </section>
+      <section>
+        <BookWithUs />
       </section>
     </div>
   );
