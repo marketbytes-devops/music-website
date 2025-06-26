@@ -12,12 +12,12 @@ const StarTitle = ({ title, className, isParentHovered }) => {
 
   return (
     <h2
-      className={`flex flex-wrap items-center space-x-1 sm:space-x-2 text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-textGray primary-font ${className}`}
+      className={`flex flex-wrap items-center justify-center md:justify-start space-x-1 sm:space-x-2 text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-3xl font-medium text-textGray primary-font ${className}`}
     >
       <motion.svg
         width="16"
         height="16"
-        className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6"
+        className="w-4 h-4 xs:w-5 xs:h-5 sm:w-5 sm:h-5"
         viewBox="0 0 26 27"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ const StarTitle = ({ title, className, isParentHovered }) => {
       <motion.svg
         width="16"
         height="16"
-        className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6"
+        className="w-4 h-4 xs:w-5 xs:h-5 sm:w-5 sm:h-5"
         viewBox="0 0 26 27"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

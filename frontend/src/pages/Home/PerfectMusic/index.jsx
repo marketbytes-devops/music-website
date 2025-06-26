@@ -48,8 +48,8 @@ const PerfectMusic = () => {
 
   const cardVariants = {
     initial: {
-      width: '40vw',
-      height: '50vw',
+      width: '80vw',
+      height: '40vh', 
       scale: 1,
       opacity: 0.9,
       transition: {
@@ -60,8 +60,33 @@ const PerfectMusic = () => {
       },
     },
     expanded: {
-      width: '80vw',
-      height: '50vw',
+      width: '90vw', 
+      height: '50vh',
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+        mass: 1,
+        duration: 0.3,
+      },
+    },
+    tabletInitial: {
+      width: '45vw', 
+      height: '45vh',
+      scale: 1,
+      opacity: 0.9,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+        mass: 1,
+      },
+    },
+    tabletExpanded: {
+      width: '70vw',
+      height: '50vh',
       scale: 1,
       opacity: 1,
       transition: {
@@ -115,7 +140,7 @@ const PerfectMusic = () => {
 
   return (
     <motion.section
-      className="py-8 md:py-16 m-4 md:m-0"
+      className="py-4 sm:py-8 md:py-16 px-2 sm:px-4 md:px-0"
       style={{ backgroundColor: 'black' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -123,32 +148,32 @@ const PerfectMusic = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className={`w-full max-w-7xl mx-auto p-4 md:p-14 rounded-3xl overflow-hidden ${backgroundColor}`}>
-        <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
-          <div className="max-w-7xl text-left">
+      <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 md:p-14 rounded-3xl overflow-hidden ${backgroundColor}`}>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-8 md:mb-8 gap-4">
+          <div className="text-left">
             <StarTitle
               title="Find your perfect music event"
-              className="my-4 md:my-8"
+              className="my-4 sm:my-6 md:my-8"
               isParentHovered={isHovered}
             />
           </div>
           <Button
             name="View All Events"
-            className="w-fit text-sm font-normal bg-black text-white px-4 py-2 md:px-6 md:py-2"
+            className="w-fit text-xs sm:text-sm font-normal bg-black text-white px-3 sm:px-4 py-1.5 sm:py-2 md:px-6 md:py-2"
             onClick={() => alert('View All Events clicked!')}
             dotColor="bg-textOrange"
             gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
           />
         </div>
 
-        <div className="flex gap-4 md:gap-9 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+        <div className="flex gap-2 sm:gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
           {musicEvents.map((event) => (
             <div key={event.id} className="flex flex-col items-start snap-center">
               <motion.div
                 className="relative flex-shrink-0 rounded-3xl overflow-hidden cursor-pointer"
                 variants={{
-                  initial: window.innerWidth < 768 ? cardVariants.initial : cardVariants.desktopInitial,
-                  expanded: window.innerWidth < 768 ? cardVariants.expanded : cardVariants.desktopExpanded,
+                  initial: window.innerWidth < 640 ? cardVariants.initial : window.innerWidth < 1024 ? cardVariants.tabletInitial : cardVariants.desktopInitial,
+                  expanded: window.innerWidth < 640 ? cardVariants.expanded : window.innerWidth < 1024 ? cardVariants.tabletExpanded : cardVariants.desktopExpanded,
                 }}
                 initial="initial"
                 animate={expandedCardId === event.id ? 'expanded' : 'initial'}
@@ -167,7 +192,7 @@ const PerfectMusic = () => {
               <AnimatePresence>
                 {expandedCardId === event.id && (
                   <motion.h3
-                    className="text-white text-base md:text-lg font-medium mt-2 md:mt-4 text-left primary-font"
+                    className="text-white text-sm sm:text-base md:text-lg font-medium mt-2 sm:mt-3 md:mt-4 text-left primary-font"
                     variants={titleVariants}
                     initial="hidden"
                     animate="visible"

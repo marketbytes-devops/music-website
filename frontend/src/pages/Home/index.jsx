@@ -3,6 +3,9 @@ import DancingBlob from '../../components/DancingBlob';
 import About from './About';
 import PerfectMusic from './PerfectMusic';
 import BookWithUs from './BookWithUs';
+import SpecialEvents from './SpecialEvents';
+import ClientStories from './ClientStories';
+import ExperiencingBeat from '../../components/UiComponents/ExperiencingBeat';
 
 const Home = () => {
   return (
@@ -19,8 +22,17 @@ const Home = () => {
       <section>
         <PerfectMusic />
       </section>
-      <section>
+      <section className='pt-4 md:pt-0 bg-black'>
         <BookWithUs />
+      </section>
+      <section className='pt-8 sm:pt-8 md:pt-16 bg-black'>
+        <SpecialEvents />
+      </section>
+      <section className='pt-8 sm:pt-8 md:pt-16 bg-black'>
+        <ClientStories />
+      </section>
+      <section className='py-8 sm:py-8 md:py-16 bg-black'>
+        <ExperiencingBeat />
       </section>
     </div>
   );

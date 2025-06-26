@@ -78,14 +78,14 @@ const BookWithUs = () => {
         <div className="relative z-20 w-full flex flex-col justify-center space-y-8">
           <div className="text-left space-y-8">
             <StarTitle
-              title="Why Book with Us?"
+              title="Why book with Us?"
               isParentHovered={isInView}
               className="text-left text-white"
             />
             <p className="text-sm sm:text-base text-[#B0B0B0] font-primary text-left">
               Our commitment to delivering exceptional, tailored musical experiences sets us apart. With a team of talented and reliable musicians who are passionate about their craft, we provide professional performances across a wide range of genres—from classical and jazz to pop and rock—ensuring that every event is matched perfectly to our clients unique vision. Our seamless planning process emphasizes meticulous attention to detail, allowing you to enjoy a hassle-free experience from start to finish. At Book Your Musician, we are dedicated to creating music that leaves lasting memories and resonates long after the final note.
             </p>
-            <div className="text-left">
+            <div className="text-center md:text-left">
               <Button
                 name="Book now"
                 className="w-fit text-sm font-normal bg-black text-white px-6 py-3 rounded-full"

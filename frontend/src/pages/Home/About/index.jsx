@@ -3,15 +3,72 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import videoBg1 from '../../../assets/videos/croud-dancing.mp4';
 import videoBg2 from '../../../assets/videos/croud-dancing.mp4';
 import videoBg3 from '../../../assets/videos/croud-dancing.mp4';
-import backgroundMusic from '../../../assets/audio/velmuruka.mp3'; 
+import backgroundMusic from '../../../assets/audio/velmuruka.mp3';
 import Button from '../../../components/Button';
 import StarTitle from '../../../components/StarTitle';
 import MainTitle from '../../../components/MainTitle';
 
+const ActiveDotSvg = ({ isSmall }) => (
+  <svg
+    width={isSmall ? "16" : "20"}
+    height={isSmall ? "16" : "20"}
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect x="0.4" y="0.4" width="19.2" height="19.2" rx="9.6" fill="black" />
+    <rect
+      x="0.4"
+      y="0.4"
+      width="19.2"
+      height="19.2"
+      rx="9.6"
+      stroke="url(#paint0_linear_1_28379)"
+      strokeWidth="0.8"
+    />
+    <circle cx="10" cy="10" r="3" fill="#F96141" />
+    <defs>
+      <linearGradient
+        id="paint0_linear_1_28379"
+        x1="10"
+        y1="0"
+        x2="10"
+        y2="20"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#4D147E" />
+        <stop offset="1" stopColor="#F96141" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+const NonActiveDotSvg = ({ isSmall }) => (
+  <svg
+    width={isSmall ? "16" : "20"}
+    height={isSmall ? "16" : "20"}
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect x="0.4" y="0.4" width="19.2" height="19.2" rx="9.6" fill="black" />
+    <rect
+      x="0.4"
+      y="0.4"
+      width="19.2"
+      height="19.2"
+      rx="9.6"
+      stroke="#383737"
+      strokeWidth="0.8"
+    />
+    <circle cx="10" cy="10" r="3" fill="#383737" />
+  </svg>
+);
+
 const About = () => {
   const ref = useRef(null);
   const videoRef = useRef(null);
-  const audioRef = useRef(null); 
+  const audioRef = useRef(null);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -220,6 +277,21 @@ const About = () => {
               ))}
             </div>
           </div>
+        </div>
+        <div className="flex items-center justify-center space-x-1 sm:space-x-2 mt-4">
+          {tabs.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTabIndex(index)}
+              className="w-[20px] h-[20px] sm:w-5 sm:h-5 flex items-center justify-center"
+            >
+              {activeTabIndex === index ? (
+                <ActiveDotSvg isSmall={!window.matchMedia('(min-width: 640px)').matches} />
+              ) : (
+                <NonActiveDotSvg isSmall={!window.matchMedia('(min-width: 640px)').matches} />
+              )}
+            </button>
+          ))}
         </div>
       </div>
     </div>

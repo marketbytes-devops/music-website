@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 
-const Button = ({ name, onClick, className = '', stylesInline = {}, dotColor = 'bg-textOrange', gradient = 'bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]' }) => {
+const Button = ({ name, onClick, className = '', stylesInline = {}, dotColor = 'bg-textOrange', gradient = 'bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]', width = 'fit' }) => {
+  const widthClass = width === 'full' ? 'w-full' : 'w-fit';
+  
   return (
-    <div className="group relative p-[1.5px] inline-block rounded-full overflow-hidden">
+    <div className={`group relative p-[1.5px] inline-block rounded-full overflow-hidden ${widthClass}`}>
       <div
         className={`absolute inset-0 rounded-full ${gradient} animate-spin group-hover:animate-none`}
       ></div>
       <button
-        className={`relative rounded-full flex items-center justify-center ${className} hover:translate-x-[0.10em] active:translate-x-[0.10em] active:translate-y-[0.15em] transition-all duration-300`}
+        className={`relative rounded-full flex items-center justify-center ${className} hover:translate-x-[0.10em] active:translate-x-[0.10em] active:translate-y-[0.15em] transition-all duration-300 ${widthClass}`}
         onClick={onClick}
         style={stylesInline}
         aria-label={name}
@@ -29,6 +31,7 @@ Button.propTypes = {
   stylesInline: PropTypes.object,
   dotColor: PropTypes.string,
   gradient: PropTypes.string,
+  width: PropTypes.oneOf(['full', 'fit']),
 };
 
 Button.defaultProps = {
@@ -37,6 +40,7 @@ Button.defaultProps = {
   stylesInline: {},
   dotColor: 'bg-textOrange',
   gradient: 'bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]',
+  width: 'fit',
 };
 
 export default Button;
