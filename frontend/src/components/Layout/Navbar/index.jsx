@@ -39,16 +39,20 @@ const Navbar = () => {
 
   return (
     <div className="z-50 flex items-center justify-center fixed w-full bg-black">
-      <nav className="w-full max-w-7xl py-4 flex items-center justify-between">
-        <h1 className="ml-6 sm:ml-6 md:ml-0 lg:ml-0 xl:ml-0 primary-font text-sm md:text-sm font-normal text-textGray">
+      <nav className="w-full max-w-7xl py-4 flex items-center justify-between px-4 sm:px-6">
+        <h1 className="primary-font text-sm md:text-sm font-normal text-textGray">
           Book Your Musician
         </h1>
         <div className="md:hidden">
-          <button onClick={toggleMenu} aria-label="Toggle menu">
+          <button
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            className="p-2" // Added padding for touch area
+          >
             {isMenuOpen ? (
-              <X className="w-5 h-5 relative right-6 text-textGray" />
+              <X className="w-6 h-6 text-textGray" /> // Increased size for better visibility
             ) : (
-              <Menu className="w-5 h-5 relative right-6 text-textGray" />
+              <Menu className="w-6 h-6 text-textGray" />
             )}
           </button>
         </div>
@@ -123,7 +127,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="md:hidden w-full flex justify-center py-4 bg-white -mr-6"
+            className="md:hidden w-full flex justify-center py-4 bg-white"
             variants={menuVariants}
             initial="hidden"
             animate="visible"
