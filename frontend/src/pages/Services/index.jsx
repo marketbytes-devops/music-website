@@ -1,7 +1,7 @@
 import Banner from "../../components/Banner";
 import ServiceCard from "../../components/UiComponents/ServiceCard";
 import image1 from "../../assets/images/service-img-1.png";
-import image2 from "../../assets/images/service-img-1.png"; // Update to different image if available
+import image2 from "../../assets/images/service-img-1.png"; 
 import image3 from "../../assets/images/service-img-1.png";
 import image4 from "../../assets/images/service-img-1.png";
 import image5 from "../../assets/images/service-img-1.png";
@@ -81,7 +81,7 @@ const Services = () => {
           ))}
         </div>
       </section>
-      <section className="pt-6 sm:pt-6 md:pt-14 bg-black">
+      <section className="pt-8 sm:pt-8 md:pt-16 bg-black -mt-6 md:-mt-10">
         <GalleryMarquee />
       </section>
       <section className="py-8 sm:py-8 md:py-16 bg-black">

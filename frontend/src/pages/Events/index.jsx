@@ -1,4 +1,6 @@
 import Banner from "../../components/Banner";
+import GalleryMarquee from "../../components/UiComponents/GalleryMarquee";
+import EventsListing from "../EventsListing";
 
 const Events = () => {
   const subtitles = [
@@ -15,6 +17,12 @@ const Events = () => {
         subtitleFirst="We offer unforgettable experiences including"
         subtitles={subtitles}
       />
+      <section className="max-w-7xl mx-auto bg-black">
+        <EventsListing />
+      </section>
+      <section className="py-8 sm:py-8 md:py-16 bg-black -mt-6 md:-mt-10">
+        <GalleryMarquee />
+      </section>
     </>
   );
 };

@@ -73,7 +73,7 @@ const Gallery = () => {
             transition={{ duration: 0.2 }}
             className="w-full max-w-7xl"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {getDisplayedMedia().length > 0 ? (
                 getDisplayedMedia().map((media, index) => (
                   <motion.div
@@ -87,13 +87,13 @@ const Gallery = () => {
                       <img
                         src={media.url}
                         alt={`Gallery item ${index + 1}`}
-                        className="w-full h-48 object-cover"
+                        className="w-full h-56 object-cover"
                       />
                     ) : (
                       <video
                         src={media.url}
                         controls
-                        className="w-full h-48 object-cover"
+                        className="w-full h-56 object-cover"
                       />
                     )}
                   </motion.div>
