@@ -69,7 +69,7 @@ const Services = () => {
         subtitleFirst="We offer unforgettable experiences including"
         subtitles={subtitles}
       />
-      <section className="w-full max-w-7xl mx-auto p-6">
+      <section className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-8">
           {serviceData.map((service) => (
             <ServiceCard
@@ -81,7 +81,7 @@ const Services = () => {
           ))}
         </div>
       </section>
-      <section className="pt-4 sm:pt-4 md:pt-10 bg-black">
+      <section className="pt-6 sm:pt-6 md:pt-14 bg-black">
         <GalleryMarquee />
       </section>
       <section className="py-8 sm:py-8 md:py-16 bg-black">

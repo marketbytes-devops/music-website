@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../../Button";
 import commonData from "../../../assets/data/commonData";
 
 const Navbar = () => {
+  const location = useLocation();
   const [activeLink, setActiveLink] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const activeNavLink = commonData.navLinks.find(
+      (link) => link.path === currentPath
+    );
+    setActiveLink(activeNavLink ? activeNavLink.name : "Home");
+  }, [location.pathname]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
