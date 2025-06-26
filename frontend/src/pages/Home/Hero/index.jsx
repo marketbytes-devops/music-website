@@ -156,7 +156,7 @@ const Hero = ({ homeData: propHomeData = homeData }) => {
             </p>
             <Button
               name="Book Now"
-              className="text-textGray text-sm font-normal bg-black px-6 py-2 transition-colors duration-300"
+              className="text-textGray text-sm font-normal bg-black px-6 py-3 transition-colors duration-300"
               onClick={() => alert("Book Now clicked!")}
               dotColor="bg-textOrange"
               gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
