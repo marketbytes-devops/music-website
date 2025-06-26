@@ -46,9 +46,9 @@ const Navbar = () => {
         <div className="md:hidden">
           <button onClick={toggleMenu} aria-label="Toggle menu">
             {isMenuOpen ? (
-              <X className="w-6 h-6 relative right-4 text-textGray" />
+              <X className="w-5 h-5 relative right-6 text-textGray" />
             ) : (
-              <Menu className="w-6 h-6 relative right-4 text-textGray" />
+              <Menu className="w-5 h-5 relative right-6 text-textGray" />
             )}
           </button>
         </div>
@@ -64,9 +64,9 @@ const Navbar = () => {
               {commonData.navLinks.map((link, index) => (
                 <motion.li
                   key={link.name}
-                  className={`primary-font text-sm md:text-sm font-normal flex items-center space-x-1 transition-colors duration-200 
-                    ${activeLink === link.name ? "text-textBlack" : "text-textBlack"} 
-                    hover:text-textOrange cursor-pointer md:text-textGray/70 md:hover:text-textOrange`}
+                  className={`primary-font text-sm font-normal flex items-center transition-colors duration-200 
+                    ${activeLink === link.name ? "text-textOrange" : "text-textBlack"} 
+                    hover:text-textOrange cursor-pointer`}
                   variants={linkVariants}
                   initial="hidden"
                   animate="visible"
@@ -74,15 +74,12 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
-                    className="flex items-center space-x-1 w-full"
+                    className="flex items-center w-full"
                     onClick={() => {
                       setActiveLink(link.name);
                       setIsMenuOpen(false);
                     }}
                   >
-                    {activeLink === link.name && (
-                      <span className="bg-textOrange w-2 h-2 rounded-full"></span>
-                    )}
                     <span>{link.name}</span>
                   </Link>
                 </motion.li>
@@ -135,7 +132,7 @@ const Navbar = () => {
             <Button
               name="Contact Us"
               className="text-textBlack text-sm md:text-sm font-normal bg-textGray px-4 md:px-6 py-2"
-              onClick={() => alert("Button clicked!")}
+              onClick={() => alert("Contact Us clicked!")}
               dotColor="bg-textOrange"
               gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
             />

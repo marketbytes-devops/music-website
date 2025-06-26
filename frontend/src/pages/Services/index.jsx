@@ -69,7 +69,7 @@ const Services = () => {
         subtitleFirst="We offer unforgettable experiences including"
         subtitles={subtitles}
       />
-      <section className="w-full max-w-7xl mx-auto">
+      <section className="w-full max-w-7xl mx-auto px-4 md:px-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-8">
           {serviceData.map((service) => (
             <ServiceCard

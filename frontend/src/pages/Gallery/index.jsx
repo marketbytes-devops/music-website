@@ -44,7 +44,7 @@ const Gallery = () => {
         />
       </header>
       <section className="flex justify-center pt-8 sm:pt-8 md:pt-16">
-        <nav className="w-full max-w-md">
+        <nav className="w-full max-w-md px-4 md:px-0">
           <ul className="flex list-none p-0 m-0 font-medium text-sm">
             {tabs.map((item) => (
               <motion.li
@@ -63,7 +63,7 @@ const Gallery = () => {
           </ul>
         </nav>
       </section>
-      <section className="flex justify-center items-center flex-1 pt-10 sm:pt-10 md:pt-20 pb-8 sm:pb-8 md:pb-16">
+      <section className="flex justify-center items-center flex-1 pt-10 sm:pt-10 md:pt-20 pb-8 sm:pb-8 md:pb-16 px-4 md:px-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedTab.label}
