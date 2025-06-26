@@ -113,7 +113,7 @@ const Footer = () => {
             </form>
           </div>
           <div className="grid items-center justify-center md:justify-end text-center md:text-left">
-            <h6 className="text-md font-normal text-textGray mb-6 md:mb-0">
+            <h6 className="text-md font-normal text-textGray mb-4 md:mb-0">
               Contact
             </h6>
             <div className="space-y-4">
