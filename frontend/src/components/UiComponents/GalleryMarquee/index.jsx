@@ -43,7 +43,7 @@ const GalleryMarquee = () => {
                             key={index}
                             className="mx-2"
                             style={{
-                                width: index % 4 === 2 ? "500px" : "200px",
+                                width: index % 4 === 2 ? "350px" : "200px",
                                 height: "200px",
                             }}
                         >

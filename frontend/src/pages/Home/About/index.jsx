@@ -246,7 +246,7 @@ const About = () => {
                   key={tab.title}
                   name={tab.title}
                   onClick={() => setActiveTabIndex(index)}
-                  className={`w-full sm:w-40 px-4 py-2 text-sm sm:text-base ${activeTabIndex === index ? 'bg-white text-textBlack' : 'border border-white bg-white/5 text-white'}`}
+                  className={`w-full md:w-40 px-4 py-2 text-sm sm:text-base ${activeTabIndex === index ? 'bg-white text-textBlack' : 'border border-white bg-white/5 text-white'}`}
                   dotColor={activeTabIndex === index ? 'bg-textOrange' : 'bg-transparent'}
                   gradient={
                     activeTabIndex === index
