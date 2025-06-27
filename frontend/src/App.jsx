@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Events from "./pages/Events";
 import Services from "./pages/Services";
 import Gallery from "./pages/Gallery";
+import ContactUs from "./pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/gallery",
         element: <Gallery />
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />
       },
     ]
   }

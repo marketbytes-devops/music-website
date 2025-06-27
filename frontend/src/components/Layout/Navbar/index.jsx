@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../Button";
 import commonData from "../../../assets/data/commonData";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -20,6 +21,11 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleContactUsClick = () => {
+    navigate("/contact-us");
+    setIsMenuOpen(false); 
   };
 
   const menuVariants = {
@@ -47,10 +53,10 @@ const Navbar = () => {
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            className="p-2" // Added padding for touch area
+            className="p-2"
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-textGray" /> // Increased size for better visibility
+              <X className="w-6 h-6 text-textGray" />
             ) : (
               <Menu className="w-6 h-6 text-textGray" />
             )}
@@ -118,7 +124,7 @@ const Navbar = () => {
           <Button
             name="Contact Us"
             className="text-textBlack text-sm font-normal bg-textGray px-6 py-2"
-            onClick={() => alert("Contact Us clicked!")}
+            onClick={handleContactUsClick}
             dotColor="bg-textOrange"
             gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
           />
@@ -136,7 +142,7 @@ const Navbar = () => {
             <Button
               name="Contact Us"
               className="text-textBlack text-sm md:text-sm font-normal bg-textGray px-4 md:px-6 py-2"
-              onClick={() => alert("Contact Us clicked!")}
+              onClick={handleContactUsClick}
               dotColor="bg-textOrange"
               gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
             />

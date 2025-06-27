@@ -13,7 +13,7 @@ const Home = () => {
       <section>
         <Hero />
       </section>
-      <div className="w-full max-w-7xl mx-auto pt-56 sm:pt-56 md:pt-40 animate-none sm:animate-none md:animate-bounce px-4">
+      <div className="w-full max-w-7xl mx-auto -mt-10 md:mt-0 pt-0 sm:pt-0 md:pt-40 animate-none sm:animate-none md:animate-bounce px-4">
         <DancingBlob />
       </div>
       <section className='pt-8 sm:pt-8 md:pt-8'>

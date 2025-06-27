@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BookNowModal from "../BookNowModal";
 
 const ServiceCard = ({ serviceImage, serviceTitle, serviceDescription }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleBookNowClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div
@@ -57,7 +67,11 @@ const ServiceCard = ({ serviceImage, serviceTitle, serviceDescription }) => {
             >
               <h2 className="text-white text-2xl font-bold mb-4">{serviceTitle}</h2>
               <p className="text-white text-sm font-thin">{serviceDescription}</p>
-              <button className="mt-4 text-textOrange text-sm font-medium flex items-center">
+              <button 
+                className="mt-4 text-textOrange text-sm font-medium flex items-center"
+                onClick={handleBookNowClick}
+                aria-label="Book this service now"
+              >
                 Book Now
                 <span className="w-2 h-2 bg-textOrange rounded-full ml-2" />
               </button>
@@ -65,6 +79,7 @@ const ServiceCard = ({ serviceImage, serviceTitle, serviceDescription }) => {
           )}
         </AnimatePresence>
       </div>
+      <BookNowModal isOpen={isModalOpen} onClose={handleModalClose} />
     </div>
   );
 };

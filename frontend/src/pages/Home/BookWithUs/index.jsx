@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { motion, useAnimation, useScroll } from "framer-motion";
 import Button from "../../../components/Button";
 import StarTitle from "../../../components/StarTitle";
+import BookNowModal from "../../../components/UiComponents/BookNowModal";
 
 const BookWithUs = () => {
   const controls = useAnimation();
   const { scrollY } = useScroll();
   const [isInView, setIsInView] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +56,14 @@ const BookWithUs = () => {
     },
   };
 
+  const handleBookNowClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div
       id="book-with-us"
@@ -89,7 +99,7 @@ const BookWithUs = () => {
               <Button
                 name="Book now"
                 className="w-fit text-sm font-normal bg-black text-white px-6 py-3 rounded-full"
-                onClick={() => alert("Book now clicked!")}
+                onClick={handleBookNowClick}
                 dotColor="bg-[#F96141]"
                 gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
               />
@@ -97,6 +107,7 @@ const BookWithUs = () => {
           </div>
         </div>
       </motion.div>
+      <BookNowModal isOpen={isModalOpen} onClose={handleModalClose} />
     </div>
   );
 };

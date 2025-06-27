@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import image1 from '../../assets/images/service-img-1.png';
 import image2 from '../../assets/images/service-img-1.png';
@@ -15,6 +15,7 @@ const EventListing = () => {
     const [selectedFilter, setSelectedFilter] = useState('All');
     const [openAccordion, setOpenAccordion] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const cardListingRef = useRef(null); 
     const itemsPerPage = 6;
 
     const filters = [
@@ -60,19 +61,29 @@ const EventListing = () => {
         }
     };
 
-    // Animation variants for filter buttons
+    const scrollToCardListing = () => {
+        if (cardListingRef.current) {
+            const offset = 145;
+            const elementPosition = cardListingRef.current.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth',
+            });
+        }
+    };
+
     const buttonVariants = {
         hover: { scale: 1.05, transition: { duration: 0.2 } },
         tap: { scale: 0.95 },
     };
 
-    // Animation variants for accordion
     const accordionVariants = {
         hidden: { height: 0, opacity: 0 },
         visible: { height: 'auto', opacity: 1, transition: { duration: 0.3 } },
     };
 
-    // Animation variants for event cards
     const cardVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: (i) => ({
@@ -82,13 +93,11 @@ const EventListing = () => {
         }),
     };
 
-    // Animation variants for pagination buttons
     const paginationVariants = {
         hover: { scale: 1.1, transition: { duration: 0.2 } },
         disabled: { opacity: 0.5, cursor: 'not-allowed' },
     };
 
-    // Animation variants for no events message
     const noEventsVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
@@ -109,6 +118,7 @@ const EventListing = () => {
                                     onClick={() => {
                                         setOpenAccordion(openAccordion === filter.value ? null : filter.value);
                                         setCurrentPage(1);
+                                        scrollToCardListing(); 
                                     }}
                                     className="flex items-center justify-between w-full text-left pt-4 pb-8 border-b border-gray-700 transition-colors"
                                 >
@@ -138,6 +148,7 @@ const EventListing = () => {
                                                     onClick={() => {
                                                         setSelectedFilter(subOption);
                                                         setCurrentPage(1);
+                                                        scrollToCardListing(); 
                                                     }}
                                                     className={`w-full text-left py-2 px-4 text-xs rounded-lg transition-colors ${selectedFilter === subOption ? 'bg-[#F96141] text-textGray' : 'bg-textGray text-black'
                                                         }`}
@@ -152,7 +163,7 @@ const EventListing = () => {
                         ))}
                     </div>
                 </div>
-                <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div ref={cardListingRef} className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <AnimatePresence>
                         {filteredItems.length === 0 ? (
                             <motion.div

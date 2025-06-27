@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import { Outlet } from 'react-router-dom';
@@ -40,6 +40,8 @@ const Layout = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const showFooter = location.pathname !== '/contact-us';
+
   return (
     <>
       <div className="pb-20 border-[#2B2B2B] border-b-[0.2px] border-t-0 border-l-0 border-r-0">
@@ -48,7 +50,7 @@ const Layout = () => {
       <div className="main-content">
         <Outlet />
       </div>
-      <Footer />
+      {showFooter && <Footer />}
       <button
         onClick={scrollToTop}
         className={`fixed bottom-8 right-8 w-12 h-12 rounded-full flex items-center justify-center transition-opacity duration-300 ${

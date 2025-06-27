@@ -105,7 +105,7 @@ const About = () => {
       title: 'About',
       content: (
         <div className="max-w-7xl text-left">
-          <StarTitle title="Our Story" className="my-10" isParentHovered={isHovered} />
+          <StarTitle title="Our Story" className="my-4 md:my-10" isParentHovered={isHovered} />
           <MainTitle firstTitle="From Vision to Melody:" secondTitle="The Book Your Musician" thirdTitle="Story" />
           <p className="text-sm sm:text-base text-textGray primary-font mt-6">
             Book Your Musician Private Limited is your one-stop destination for all your musical needs. We specialize in curating unforgettable musical experiences for a variety of events, from intimate gatherings to grand celebrations. Looking to book a musical band? Check out Book Your Musician! We offer various bands to choose from, catering to all genres and event types. With just a few clicks, you can browse several options and find the perfect fit for your occasion. Whether it’s a wedding, corporate event, or private party, you’ll find the right sound to elevate your event.
@@ -117,7 +117,7 @@ const About = () => {
       title: 'Our Mission',
       content: (
         <div className="max-w-7xl text-left">
-          <StarTitle title="Our Mission" className="my-10" isParentHovered={isHovered} />
+          <StarTitle title="Our Mission" className="my-4 md:my-10" isParentHovered={isHovered} />
           <MainTitle firstTitle="Creating" secondTitle="Unforgettable Moments" thirdTitle="Through the Power of Music!" />
           <p className="text-sm sm:text-base text-textGray primary-font mt-6">
             Our mission is to bring joy, energy, and excitement to every occasion through the magic of live music. We are committed to delivering exceptional musical experiences that go beyond expectations, ensuring every event is unforgettable. By connecting clients with top-tier musicians, we create lasting memories that leave a lasting impact.
@@ -129,7 +129,7 @@ const About = () => {
       title: 'Our Values',
       content: (
         <div className="max-w-7xl text-left">
-          <StarTitle title="Our Values" className="my-10" isParentHovered={isHovered} />
+          <StarTitle title="Our Values" className="my-4 md:my-10" isParentHovered={isHovered} />
           <MainTitle firstTitle="Our" secondTitle="Core Values" thirdTitle="- Music, Passion, and Excellence in Every Note" />
           <p className="text-sm sm:text-base text-textGray primary-font mt-6">
             Integrity, innovation, and inclusivity drive everything we do. We believe in building a culture that celebrates diversity and encourages bold ideas.

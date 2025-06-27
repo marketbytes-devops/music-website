@@ -3,10 +3,12 @@ import StarTitle from "../StarTitle";
 import Button from "../Button";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BookNowModal from "../UiComponents/BookNowModal";
 
 const Banner = ({ title, subtitleFirst, subtitles }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [currentSubtitleIndex, setCurrentSubtitleIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,6 +28,14 @@ const Banner = ({ title, subtitleFirst, subtitles }) => {
       text-shadow: 0 0 4px rgba(254, 11, 134, 0.6);
     }
   `).join("\n");
+
+  const handleBookNowClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <header
@@ -61,13 +71,14 @@ const Banner = ({ title, subtitleFirst, subtitles }) => {
           <Button
             name="Book Now"
             className="text-textGray text-sm font-normal bg-black px-6 py-3 transition-colors duration-300"
-            onClick={() => alert("Book Now clicked!")}
+            onClick={handleBookNowClick}
             dotColor="bg-textOrange"
             gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
             aria-label="Book a musician now"
           />
         </div>
       </div>
+      <BookNowModal isOpen={isModalOpen} onClose={handleModalClose} />
     </header>
   );
 };
