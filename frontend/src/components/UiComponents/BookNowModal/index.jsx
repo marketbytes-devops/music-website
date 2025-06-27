@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
-import Button from "../../Button";
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
+import Button from '../../Button';
+import apiClient from '../../../api';
 
 const BookNowModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -10,40 +11,68 @@ const BookNowModal = ({ isOpen, onClose }) => {
     email: '',
     phone: '',
     message: '',
+    submittedUrl: '',
+    referralUrl: '',
   });
-
   const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     message: '',
+    submittedUrl: '',
+    referralUrl: '',
+    form: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(null);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  useEffect(() => {
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      submittedUrl: window.location.href,
+      referralUrl: document.referrer || '',
     }));
-    // Clear error for the field when user starts typing
-    setErrors((prev) => ({
-      ...prev,
-      [name]: '',
-    }));
-  };
+
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${import.meta.env.VITE_RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen, onClose]);
 
   const validateForm = () => {
-    let isValid = true;
     const newErrors = {
       firstName: '',
       lastName: '',
       email: '',
       phone: '',
       message: '',
+      submittedUrl: '',
+      referralUrl: '',
+      form: '',
     };
+    let isValid = true;
 
-    // Required field validations
     if (!formData.firstName.trim()) {
       newErrors.firstName = 'First Name is required';
       isValid = false;
@@ -53,7 +82,7 @@ const BookNowModal = ({ isOpen, onClose }) => {
       isValid = false;
     }
     if (!formData.email.trim()) {
-      newErrors.email = 'Email Address is required';
+      newErrors.email = 'Email is required';
       isValid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
@@ -63,9 +92,16 @@ const BookNowModal = ({ isOpen, onClose }) => {
       newErrors.message = 'Message is required';
       isValid = false;
     }
-    // Phone is optional, but validate format if provided
     if (formData.phone.trim() && !/^\+?\d{8,15}$/.test(formData.phone.replace(/\s/g, ''))) {
       newErrors.phone = 'Please enter a valid phone number (8-15 digits)';
+      isValid = false;
+    }
+    if (formData.submittedUrl && !formData.submittedUrl.match(/^https?:\/\/.+/)) {
+      newErrors.submittedUrl = 'Invalid URL format';
+      isValid = false;
+    }
+    if (formData.referralUrl && !formData.referralUrl.match(/^https?:\/\/.+/)) {
+      newErrors.referralUrl = 'Invalid URL format';
       isValid = false;
     }
 
@@ -73,35 +109,61 @@ const BookNowModal = ({ isOpen, onClose }) => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      console.log('Form submitted:', formData);
-      alert("Form submitted successfully!");
-      onClose(); // Close the modal after successful submission
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape") {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    setSuccess(null);
+
+    window.grecaptcha.ready(async () => {
+      try {
+        const token = await window.grecaptcha.execute(import.meta.env.VITE_RECAPTCHA_SITE_KEY, { action: 'submit' });
+
+        await apiClient.post('/api/contact/contacts/create/', {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          submitted_url: formData.submittedUrl,
+          referral_url: formData.referralUrl,
+          recaptcha_token: token,
+        });
+
+        setSuccess('Form submitted successfully! Check your email for confirmation.');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          message: '',
+          submittedUrl: window.location.href, 
+          referralUrl: document.referrer || '', 
+        });
+        setErrors({});
         onClose();
+      } catch (err) {
+        setErrors({ form: err.response?.data?.error || 'Something went wrong. Please try again.' });
+      } finally {
+        setIsSubmitting(false);
       }
-    };
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "auto";
-    };
-  }, [isOpen, onClose]);
+    });
+  };
 
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.3, ease: "easeOut" } },
-    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2, ease: "easeIn" } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.3, ease: 'easeOut' } },
+    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2, ease: 'easeIn' } },
   };
 
   const backdropVariants = {
@@ -124,7 +186,6 @@ const BookNowModal = ({ isOpen, onClose }) => {
             aria-label="Close modal"
             role="button"
           />
-
           <motion.div
             className="relative bg-[#0D000F] text-white rounded-lg shadow-lg max-w-sm w-full mx-4 p-6"
             variants={modalVariants}
@@ -145,6 +206,8 @@ const BookNowModal = ({ isOpen, onClose }) => {
             <h6 id="modal-title" className="text-md font-normal text-textGray mb-6 mt-6 text-left">
               Please use the form below to get in touch
             </h6>
+            {errors.form && <p className="text-red-500 text-xs mb-4">{errors.form}</p>}
+            {success && <p className="text-green-500 text-xs mb-4">{success}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid gap-4">
                 <div>
@@ -158,9 +221,7 @@ const BookNowModal = ({ isOpen, onClose }) => {
                       errors.firstName ? 'border-red-500' : 'border-textGray focus:border-textPurple'
                     }`}
                   />
-                  {errors.firstName && (
-                    <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
-                  )}
+                  {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
                   <input
@@ -173,9 +234,7 @@ const BookNowModal = ({ isOpen, onClose }) => {
                       errors.lastName ? 'border-red-500' : 'border-textGray focus:border-textPurple'
                     }`}
                   />
-                  {errors.lastName && (
-                    <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
-                  )}
+                  {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
                 </div>
               </div>
               <div className="grid gap-4">
@@ -190,13 +249,11 @@ const BookNowModal = ({ isOpen, onClose }) => {
                       errors.email ? 'border-red-500' : 'border-textGray focus:border-textPurple'
                     }`}
                   />
-                  {errors.email && (
-                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-                  )}
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                 </div>
                 <div>
                   <input
-                    type="tel"
+                    type="number"
                     name="phone"
                     placeholder="Phone Number"
                     value={formData.phone}
@@ -205,9 +262,7 @@ const BookNowModal = ({ isOpen, onClose }) => {
                       errors.phone ? 'border-red-500' : 'border-textGray focus:border-textPurple'
                     }`}
                   />
-                  {errors.phone && (
-                    <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                  )}
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                 </div>
               </div>
               <div>
@@ -221,18 +276,17 @@ const BookNowModal = ({ isOpen, onClose }) => {
                     errors.message ? 'border-red-500' : 'border-textGray focus:border-textPurple'
                   }`}
                 />
-                {errors.message && (
-                  <p className="text-red-500 text-xs mt-1">{errors.message}</p>
-                )}
+                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
               </div>
               <Button
-                name="Submit"
+                name={isSubmitting ? 'Submitting...' : 'Submit'}
                 className="text-textGray text-sm font-normal bg-black px-6 py-2 transition-colors duration-300 rounded-lg"
-                onClick={handleSubmit}
+                type="submit"
                 dotColor="bg-textOrange"
                 gradient="bg-gradient-to-b from-[#F96141] via-[#662451] to-[#4D147E]"
                 aria-label="Submit contact form"
                 width="full"
+                disabled={isSubmitting}
               />
             </form>
           </motion.div>
